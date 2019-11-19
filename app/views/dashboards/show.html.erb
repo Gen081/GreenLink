@@ -1,0 +1,49 @@
+<h1>Welcome, <%= current_user.email %></h1>
+
+<% if current_user.fpl_account %>
+  <table>
+    <caption>Bills</caption>
+    <thead>
+      <tr>
+        <th>Billing Period</th>
+        <th>Kilowatt Hours</th>
+        <th>Bill Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.fpl_account.bills.each do |bill| %>
+        <tr>
+          <td><%= bill.start_date.strftime('%-m/%-d/%y') %> to <%= bill.end_date.strftime('%-m/%-d/%y') %></td>
+          <td><%= bill.kilowatt_hours %> kWh</td>
+          <td><%= (bill.amount_cents.to_f / 100).to_s(:currency) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+
+
+  <%= button_to "Delete Account",
+      fpl_account_url, method: :delete,
+      data: { confirm: "Are you sure?" } %>
+<% else %>
+  <h1>Connect your FPL Account</h1>
+  <%= form_with url: fpl_account_url do |f| %>
+    <p>
+      <%= f.label :username %>
+      <%= f.email_field :username, autocomplete: "off" %>
+    </p>
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off" %>
+    </p>
+    <p>
+      <%= f.submit "Add FPL Account" %>
+    </p>
+  <% end %>
+<% end %>
+
+
+
+
+

@@ -1,0 +1,19 @@
+<h1>Challenges</h1>
+<% @challenges.each do |ch| %>
+    <h4>
+        title: <%= ch.title %> <br />
+    </h4>
+    <p>
+        description: <%= ch.description %> <br />
+        points: <%= ch.points %> <br />
+    </p>
+    <h5>
+        tips for <%= ch.title %>
+    </h5>
+    <p>
+        <% ch.tips.each do |cht| %>
+        title: <%= cht.title %>
+        description: <%= cht.description %>
+    </p>
+    <% end %>
+<% end %>
