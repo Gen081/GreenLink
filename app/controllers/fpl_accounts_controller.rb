@@ -1,14 +1,19 @@
 class FplAccountsController < ApplicationController
 
   def index
-    if current_user.fpl_account&.zipcode
-      fpl_accounts = FplAccount.where(zipcode: current_user.fpl_account&.zipcode)
-    else
-      fpl_accounts = []
+    respond_to do |format|
+      format.html
+        format.json do
+          if current_user.fpl_account&.zipcode
+            fpl_accounts = FplAccount.where(zipcode: current_user.fpl_account&.zipcode)
+          else
+            fpl_accounts = []
+          end
+          render json: fpl_accounts 
+        end
     end
-    render json: fpl_accounts 
   end
-  
+
   def create
     fpl_account = FplAccount.find_or_initialize_by(user: current_user)
     fpl_account.assign_attributes(username: params[:username], password: params[:password])
