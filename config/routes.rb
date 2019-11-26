@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :fpl_account, only: [:create, :destroy] do
     resource :sync, only: [:create]
   end
+  resources :fpl_accounts, only: [:index]
   resource :profile, only: [:create, :destroy]
   resources :challenges, only: [:index]
   resources :tips, only: [:index]
