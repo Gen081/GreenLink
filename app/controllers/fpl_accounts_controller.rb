@@ -9,8 +9,8 @@ class FplAccountsController < ApplicationController
           else
             fpl_accounts = []
           end
-          render json: fpl_accounts 
-        end
+        render json: fpl_accounts
+      end
     end
   end
 
