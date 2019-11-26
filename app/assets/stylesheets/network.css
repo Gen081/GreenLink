@@ -1,0 +1,10 @@
+.network-wrapper {
+    width: 100%;
+    height: auto;
+}
+
+.person-profile {
+    width: 30%;
+    height: auto;
+    background-color: blueviolet;
+}
